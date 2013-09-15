@@ -3,7 +3,7 @@ require 'formula'
 class Phpenv < Formula
   homepage 'https://github.com/humanshell/phpenv'
   url 'https://github.com/humanshell/phpenv/archive/c2e51e51427751431b0b322722a3bb9b6c0061bc.tar.gz'
-  sha1 'f8e75e3a101edc66e1e2439c906363d25afe9de'
+  sha1 '2f8e75e3a101edc66e1e2439c906363d25afe9de'
   head 'https://github.com/humanshell/phpenv.git'
   version 'c2e51e5'
 
