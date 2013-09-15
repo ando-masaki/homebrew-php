@@ -1,27 +1,26 @@
 require 'formula'
 
 class Phpenv < Formula
-  homepage 'https://github.com/CHH/phpenv'
-  url 'https://github.com/CHH/phpenv/archive/01a2c1e25096f8ff10f2f781428a5d470e1ecaba.tar.gz'
-  sha1 '749d430a3c4354b1e27c3101026518689aed51a4'
-  head 'https://github.com/CHH/phpenv.git'
-  version '01a2c1e'
-
-  option 'skip-install', "Do not run phpenv-install.sh"
+  homepage 'https://github.com/humanshell/phpenv'
+  url 'https://github.com/humanshell/phpenv/archive/c2e51e51427751431b0b322722a3bb9b6c0061bc.tar.gz'
+  sha1 'f8e75e3a101edc66e1e2439c906363d25afe9de'
+  head 'https://github.com/humanshell/phpenv.git'
+  version 'c2e51e5'
 
   def install
-    bin.install 'bin/phpenv-install.sh'
-    man1.install 'man/phpenv-install.1'
-    doc.install 'man/phpenv-install.1.html'
-    system("#{bin}/phpenv-install.sh") unless build.include? 'skip-install'
+    inreplace 'libexec/phpenv', '/usr/local', HOMEBREW_PREFIX
+    prefix.install Dir['*']
   end
 
-  def caveats;
-    output = "To finish installing phpenv:\n"
-    output << " * Run phpenv-install.sh\n" if build.include? 'skip-install'
-    output << " * Add ~/.phpenv/bin to your $PATH\n"
-    output << " * Add \"eval $(phpenv init -)\" at the end of your ~/.bashrc\n"
-    output << " * Restart your shell"
-    output
+  def caveats; <<-EOS.undent
+    To finish installing phpenv:
+
+      * Add phpenv init to your shell to enable shims and autocompletion.
+        $ echo 'eval "$(phpenv init -)"' >> ~/.bash_profile
+      * Restart your shell so the path changes take effect. You can now begin using phpenv.
+        $ exec $SHELL
+      * Rebuild the shim binaries. You should do this any time you install a new PHP binary.
+        $ phpenv rehash
+    EOS
   end
 end
