@@ -8,7 +8,7 @@ class Phpenv < Formula
   version '099f16d'
 
   def install
-    prefix.install 'bin', 'phpenv.d', 'completions', 'libexec'
+    prefix.install 'bin', 'phpenv.d', 'completions', 'libexec', 'etc', 'php-ext', 'patches'
     # Run rehash after installing.
     system "#{bin}/phpenv", "rehash"
   end
